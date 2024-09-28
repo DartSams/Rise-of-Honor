@@ -1,0 +1,6 @@
+/Temp
+/Library
+*.log
+*.cache
+*.vsidx
+*.meta

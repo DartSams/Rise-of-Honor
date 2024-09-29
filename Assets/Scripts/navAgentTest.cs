@@ -18,4 +18,12 @@ public class navAgentTest : MonoBehaviour
     {
         agent.SetDestination(navTarget.transform.position);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "player")
+        {
+            Debug.Log("Player Hit");
+        }
+    }
 }

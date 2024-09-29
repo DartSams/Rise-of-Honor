@@ -39,4 +39,9 @@ public class gunScript : MonoBehaviour
         player.GetNamedChild("rightHandController").GetComponent<playerController>().loseMoney(price);
     }
 
+    public void removeText()
+    {
+        priceText.enabled = false;
+    }
+
 }

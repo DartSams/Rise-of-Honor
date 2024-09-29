@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class navAgentTest : MonoBehaviour
 {
     public GameObject navTarget;
-    public NavMeshAgent agent;
+    NavMeshAgent agent;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame

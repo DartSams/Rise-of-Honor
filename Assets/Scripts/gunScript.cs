@@ -9,10 +9,10 @@ public class gunScript : MonoBehaviour
 {
     public GameObject bullet;
     public Transform bulletSpawn;
-    float bulletSpeed = 500f;
     public GameObject player;
-    public int price = 500;
+    public int price;
     public TMP_Text priceText;
+    public int gunDamage;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,20 +28,18 @@ public class gunScript : MonoBehaviour
     // Update is called once per frame
     public void Shoot()
     {
-        GameObject b = Instantiate(bullet, bulletSpawn.position,bulletSpawn.rotation);
-        //b.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
-        //b.transform.parent = gameObject.transform;
-        //Destroy(bullet, 5f);
+        GameObject b = Instantiate(bullet, bulletSpawn.position,bulletSpawn.rotation); //creates a bullet when the gun is shot
+        b.transform.parent = gameObject.transform; //sets the bullet to be the child of the gun
     }
 
     public void takePlayerMoney()
     {
-        player.GetNamedChild("rightHandController").GetComponent<playerController>().loseMoney(price);
+        player.GetNamedChild("rightHandController").GetComponent<playerController>().pm.loseMoney(price);
     }
 
     public void removeText()
     {
-        priceText.enabled = false;
+        priceText.enabled = false; //when the gun is picked up removes the cost price of the gun
     }
 
 }

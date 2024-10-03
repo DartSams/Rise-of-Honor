@@ -5,17 +5,17 @@ using UnityEngine;
 public class bulletScript : MonoBehaviour
 {
     int bulletSpeed = 100;
-
+    public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed); //when bullet is spawned it moved forwards in the direction of shooting
+        rb.AddForce(transform.forward * bulletSpeed); //when bullet is spawned it moved forwards in the direction of shooting
         //transform.parent = gameObject.transform;
     }
     private void OnCollisionEnter(Collision collision)
@@ -37,7 +37,7 @@ public class bulletScript : MonoBehaviour
             gunScript gun = transform.parent.gameObject.GetComponent<gunScript>();
             gun.player.GetComponent<playerManager>().addMoney(100);
             other.gameObject.GetComponent<enemyScript>().loseHealth(gun.gunDamage);
-            Debug.Log("enemy health is at" + other.gameObject.GetComponent<enemyScript>().currHealth);
+            Debug.Log("enemy health is at " + other.gameObject.GetComponent<enemyScript>().currHealth);
         } 
     }
 }

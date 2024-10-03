@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class enemyScript : MonoBehaviour
 {
     public float currHealth;
     public float maxHealth = 100f;
     Animator anim;
+    public GameObject rightHand;
+    public GameObject leftHand;
+    public navAgentTest agentSelf;
+    public NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Awake()
@@ -17,11 +22,14 @@ public class enemyScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (currHealth <= 0)
         {
+            anim.SetBool("chase", false);
             anim.SetTrigger("death");
+            agentSelf.enabled = false;
+            agent.enabled = false;
         }
     }
 
@@ -34,9 +42,20 @@ public class enemyScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "player")
+        {
+            Debug.Log("Player Hit");
+        }
+    }
+
     public void loseHealth(int amount)
     {
-        currHealth -= amount;
+        if (currHealth > 0)
+        {
+            currHealth -= amount;
+        } 
     }
 
     public void stopMoving()

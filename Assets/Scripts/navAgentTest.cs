@@ -34,11 +34,5 @@ public class navAgentTest : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.tag == "player")
-        {
-            Debug.Log("Player Hit");
-        }
-    }
+
 }

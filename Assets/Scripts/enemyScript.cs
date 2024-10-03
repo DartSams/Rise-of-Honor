@@ -9,8 +9,8 @@ public class enemyScript : MonoBehaviour
     public float currHealth;
     public float maxHealth = 100f;
     Animator anim;
-    public GameObject rightHand;
-    public GameObject leftHand;
+    //public GameObject rightHand;
+    //public GameObject leftHand;
     public navAgentTest agentSelf;
     public NavMeshAgent agent;
 

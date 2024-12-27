@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f86c11ebc59696b46ae90a70ccab7f8b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0009999275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f86c11ebc59696b46ae90a70ccab7f8b,
         type: 3}
@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Girlscout T Masuyama
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f86c11ebc59696b46ae90a70ccab7f8b,
+        type: 3}
+      propertyPath: m_TagString
+      value: enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87,6 +92,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -6260944452483883335}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f86c11ebc59696b46ae90a70ccab7f8b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5407823740994316157}
   m_SourcePrefab: {fileID: 100100000, guid: f86c11ebc59696b46ae90a70ccab7f8b, type: 3}
 --- !u!1 &3101484300787338399 stripped
 GameObject:
@@ -110,6 +119,7 @@ MonoBehaviour:
   maxHealth: 100
   agentSelf: {fileID: 7819175418946222718}
   agent: {fileID: -8244439508372407707}
+  navTarget: {fileID: 0}
 --- !u!114 &7819175418946222718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +127,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3101484300787338399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932f8a6068111c042947360174904ab0, type: 3}
   m_Name: 
@@ -155,7 +165,7 @@ Animator:
   m_GameObject: {fileID: 3101484300787338399}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a8c254388468d5a41a2adfd8860e7f3f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 65b19f5150ea05c44a9068496005611b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -193,3 +203,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!136 &5407823740994316157
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3101484300787338399}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.1913412
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0100385, z: 0}

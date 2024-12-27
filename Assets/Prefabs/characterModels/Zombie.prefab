@@ -1311,7 +1311,7 @@ Animator:
   m_GameObject: {fileID: 4377211321053079128}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7551feeeb30c81542881b0e8e8996791, type: 3}
-  m_Controller: {fileID: 9100000, guid: a8c254388468d5a41a2adfd8860e7f3f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 65b19f5150ea05c44a9068496005611b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1336,10 +1336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHealth: 0
   maxHealth: 100
-  rightHand: {fileID: 1571811320197871112}
-  leftHand: {fileID: 1017481899017786053}
   agentSelf: {fileID: 930962999930505630}
   agent: {fileID: 890858356508582455}
+  navTarget: {fileID: 0}
 --- !u!114 &930962999930505630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,7 +1346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4377211321053079128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932f8a6068111c042947360174904ab0, type: 3}
   m_Name: 

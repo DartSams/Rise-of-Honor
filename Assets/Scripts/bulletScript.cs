@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class bulletScript : MonoBehaviour
 {
-    int bulletSpeed = 100;
+    int bulletSpeed = 40;
     public Rigidbody rb;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
         rb.GetComponent<Rigidbody>();
+        Destroy(gameObject, 3f);
     }
 
     // Update is called once per frame
@@ -22,9 +24,8 @@ public class bulletScript : MonoBehaviour
     {
         if (collision.gameObject.tag != "gun")
         {
-            Destroy(gameObject,1.5f);
+            Destroy(gameObject, 1.5f);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,9 +35,12 @@ public class bulletScript : MonoBehaviour
             Debug.Log("enemy hit");
             //when the bullet is instantiated its made a child component of the gun the gun script has a reference to the player 
             //when the bullet enters into the enemy the player gains money
-            gunScript gun = transform.parent.gameObject.GetComponent<gunScript>();
-            gun.player.GetComponent<playerManager>().addMoney(100);
-            other.gameObject.GetComponent<enemyScript>().loseHealth(gun.gunDamage);
+
+            //gunScript gun = transform.parent.gameObject.GetComponent<gunScript>();
+            //gun.player.GetComponent<playerManager>().addMoney(100);
+
+
+            //other.gameObject.GetComponent<enemyScript>().loseHealth(damage);
             Debug.Log("enemy health is at " + other.gameObject.GetComponent<enemyScript>().currHealth);
         } 
     }

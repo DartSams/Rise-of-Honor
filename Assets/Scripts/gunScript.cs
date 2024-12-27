@@ -15,6 +15,7 @@ public class gunScript : MonoBehaviour
     public int gunDamage;
     AudioSource shotSound;
     bool isShooting;
+    bool canShoot = false;
     public bool isSemiAutoGun;
     public bool isFullAutoGun;
 
@@ -29,14 +30,22 @@ public class gunScript : MonoBehaviour
     private void FixedUpdate()
     {
         //fullAutoShot();
+        if (canShoot && isFullAutoGun)
+        {
+            Invoke("Shoot", 0.25f);
+        } 
     }
 
     // Update is called once per frame
     public void Shoot()
     {
         GameObject b = Instantiate(bullet, bulletSpawn.position,bulletSpawn.rotation); //creates a bullet when the gun is shot
-        b.transform.parent = gameObject.transform; //sets the bullet to be the child of the gun
-        shotSound.Play();
+        //b.transform.parent = gameObject.transform; //sets the bullet to be the child of the gun
+        b.GetComponent<bulletScript>().damage = gunDamage;
+        if (!isFullAutoGun)
+        {
+            shotSound.PlayOneShot(shotSound.clip); //PlayOneShot plays audio without interrupting the previous one
+        }
     }
 
     public void semiAutoShot()
@@ -51,10 +60,12 @@ public class gunScript : MonoBehaviour
 
     public void fullAutoShot()
     {
-        while (isShooting == true && isFullAutoGun == true)
-        {
-            Shoot();
-        }
+        canShoot = true;
+    }
+
+    public void stopShooting()
+    {
+        canShoot = false;
     }
 
     public void takePlayerMoney()

@@ -20,26 +20,30 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Transform zombieLocation = getRandomFromList(zombieSpawnLocations).transform;
+        GameObject zombie = chooseZombie(zombiePrefabs);
+        zombie.tag = "enemy";
+        Instantiate(zombie, zombieLocation).GetComponent<enemyScript>().navTarget = player;
         playerManager = player.GetComponent<playerManager>();
-        for (int i = 0; i <= waveNum; i++)
+        for (int i = 1; i <= waveNum; i++)
         {
-            spawnZombie();
+            StartCoroutine(spawnZombie());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        undeadCountText.text = GameObject.FindGameObjectsWithTag("enemy").Length.ToString();
+        undeadCountText.text = "-" + GameObject.FindGameObjectsWithTag("enemy").Length.ToString();
         playerMoneyText.text = "$" + playerManager.money.ToString();
         if (GameObject.FindGameObjectsWithTag("enemy").Length == 0)
         {
+            waveNum++;
+            waveCountText.text = "Wave: " + waveNum.ToString();
             for (int i = 0; i <= waveNum; i++)
             {
                 spawnZombie();
             }
-            waveNum++;
-            waveCountText.text = "Wave: " + waveNum.ToString();
 
             if (waveNum == waveChangeLimit)
             {
@@ -51,12 +55,14 @@ public class gameManager : MonoBehaviour
         } //if all zombies are killed then starts a new round spawning in more zombies
     }
 
-    void spawnZombie()
+    public IEnumerator spawnZombie()
     {
+        float delay = Random.Range(2.5f, 10f);
+        yield return new WaitForSeconds(delay);
         Transform zombieLocation = getRandomFromList(zombieSpawnLocations).transform;
         GameObject zombie = chooseZombie(zombiePrefabs);
-            
-        Instantiate(zombie, zombieLocation).GetComponent<navAgentTest>().navTarget = player;
+        zombie.tag = "enemy";    
+        Instantiate(zombie, zombieLocation).GetComponent<enemyScript>().navTarget = player;
     }
 
     GameObject chooseZombie(List<GameObject> lst)

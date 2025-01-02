@@ -79,10 +79,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: efeff787237bf834db5cb7cf28d61542,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 904170582212360146}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: efeff787237bf834db5cb7cf28d61542,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1559478075095760286}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: efeff787237bf834db5cb7cf28d61542,
         type: 3}
@@ -116,23 +112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHealth: 0
-  maxHealth: 100
-  agentSelf: {fileID: 904170582212360146}
+  maxHealth: 5
   agent: {fileID: 1559478075095760286}
   navTarget: {fileID: 0}
---- !u!114 &904170582212360146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6415982622640585223}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932f8a6068111c042947360174904ab0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navTarget: {fileID: 0}
+  alive: 0
+  bloodSplatterEffect: {fileID: 0}
 --- !u!195 &1559478075095760286
 NavMeshAgent:
   m_ObjectHideFlags: 0

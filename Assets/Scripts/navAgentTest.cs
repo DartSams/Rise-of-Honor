@@ -72,8 +72,6 @@ public class navAgentTest : MonoBehaviour
         {
             Debug.Log("Target has been hit");
             anim.SetTrigger("takeHit");
-            agent.SetDestination(agent.transform.position);
-            agent.isStopped = true;
         }
     }
 

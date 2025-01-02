@@ -4,10 +4,12 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class gunScript : MonoBehaviour
 {
     public GameObject bullet;
+    public int clipSize;
     public Transform bulletSpawn;
     public GameObject player;
     public int price;
@@ -16,8 +18,8 @@ public class gunScript : MonoBehaviour
     AudioSource shotSound;
     bool isShooting;
     bool canShoot = false;
-    public bool isSemiAutoGun;
     public bool isFullAutoGun;
+    public ParticleSystem muzzleGunFlash;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,6 +34,7 @@ public class gunScript : MonoBehaviour
         //fullAutoShot();
         if (canShoot && isFullAutoGun)
         {
+            //Shoot();
             Invoke("Shoot", 0.25f);
         } 
     }
@@ -39,23 +42,22 @@ public class gunScript : MonoBehaviour
     // Update is called once per frame
     public void Shoot()
     {
-        GameObject b = Instantiate(bullet, bulletSpawn.position,bulletSpawn.rotation); //creates a bullet when the gun is shot
-        //b.transform.parent = gameObject.transform; //sets the bullet to be the child of the gun
-        b.GetComponent<bulletScript>().damage = gunDamage;
-        if (!isFullAutoGun)
+        if (clipSize > 0)
         {
-            shotSound.PlayOneShot(shotSound.clip); //PlayOneShot plays audio without interrupting the previous one
-        }
+            GameObject b = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.rotation); //creates a bullet when the gun is shot
+            muzzleGunFlash.Play();
+            //b.transform.parent = gameObject.transform; //sets the bullet to be the child of the gun
+            b.GetComponent<bulletScript>().damage = gunDamage;
+            if (!isFullAutoGun)
+            {
+                shotSound.PlayOneShot(shotSound.clip); //PlayOneShot plays audio without interrupting the previous one
+            }
+        }   
     }
 
-    public void semiAutoShot()
+    public void decreaseClip()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            GameObject b = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation); //creates a bullet when the gun is shot
-            b.transform.parent = gameObject.transform; //sets the bullet to be the child of the gun
-        }
-        //shotSound.Play();
+        clipSize -= 1;
     }
 
     public void fullAutoShot()
@@ -71,11 +73,13 @@ public class gunScript : MonoBehaviour
     public void takePlayerMoney()
     {
         player.GetNamedChild("rightHandController").GetComponent<playerController>().pm.loseMoney(price);
+        gameObject.tag = "currGun";
     }
 
     public void removeText()
     {
-        priceText.enabled = false; //when the gun is picked up removes the cost price of the gun
+        Destroy(priceText);
+        //priceText.enabled = false; //when the gun is picked up removes the cost price of the gun
     }
 
     public void shootOn()

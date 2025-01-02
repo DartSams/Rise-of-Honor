@@ -1273,7 +1273,6 @@ GameObject:
   - component: {fileID: 4032175417642171618}
   - component: {fileID: 6995505264147457688}
   - component: {fileID: 2935008476951886064}
-  - component: {fileID: 930962999930505630}
   - component: {fileID: 890858356508582455}
   - component: {fileID: 6580522529924721581}
   - component: {fileID: 5989384107391267090}
@@ -1335,23 +1334,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHealth: 0
-  maxHealth: 100
-  agentSelf: {fileID: 930962999930505630}
+  maxHealth: 5
   agent: {fileID: 890858356508582455}
   navTarget: {fileID: 0}
---- !u!114 &930962999930505630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4377211321053079128}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932f8a6068111c042947360174904ab0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navTarget: {fileID: 0}
+  alive: 0
+  bloodSplatterEffect: {fileID: 0}
 --- !u!195 &890858356508582455
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1362,7 +1349,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.7
+  m_Speed: 1798.9548
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360

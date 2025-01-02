@@ -11,16 +11,21 @@ public class enemyScript : MonoBehaviour
     Animator anim;
     //public GameObject rightHand;
     //public GameObject leftHand;
-    public navAgentTest agentSelf;
+    //public navAgentTest agentSelf;
     public NavMeshAgent agent;
     public GameObject navTarget;
+    public bool alive;
+    int deathAnimation;
+    public GameObject bloodSplatterEffect;
 
     // Start is called before the first frame update
     void Awake()
     {
+        alive = true;
         currHealth = maxHealth;
         anim = GetComponent<Animator>();
         StartCoroutine(startMoving());
+        deathAnimation = Random.Range(1, 3);
     }
 
     private IEnumerator startMoving()
@@ -33,20 +38,13 @@ public class enemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currHealth <= 0)
-        {
-            anim.SetBool("chase", false);
-            anim.SetTrigger("death");
-            agentSelf.enabled = false;
-            agent.enabled = false;
-        }
-
+        
         if (Vector3.Distance(agent.transform.position, navTarget.transform.position) <= 2.5)
         {
             anim.SetBool("chase", false);
             anim.SetTrigger("attack");
         }
-        else
+        else if (alive)
         {
             anim.SetBool("chase", true);
         }
@@ -61,15 +59,22 @@ public class enemyScript : MonoBehaviour
     {
         if (other.transform.tag == "player")
         {
-            Debug.Log("Player Hit");
+            //Debug.Log("Player Hit");
         }
 
         if (other.gameObject.tag == "bullet")
         {
-            Debug.Log("Target has been hit");
+            //Debug.Log("Target has been hit");
             anim.SetTrigger("takeHit");
-            agent.isStopped = true;
+            //agent.isStopped = true;
             navTarget.GetComponent<playerManager>().addMoney(100);
+
+            Vector3 hitPoint = other.ClosestPointOnBounds(transform.position);  // Get the closest point on the zombie's collider
+            Vector3 bloodDirection = hitPoint - transform.position; // Direction from zombie to the impact point
+            Destroy(other.gameObject);
+            GameObject bloodEffect = Instantiate(bloodSplatterEffect, hitPoint, Quaternion.LookRotation(bloodDirection));
+
+            bloodEffect.transform.Rotate(90f, 0f, 0f); 
         }
     }
 
@@ -78,7 +83,26 @@ public class enemyScript : MonoBehaviour
         if (currHealth > 0)
         {
             currHealth -= amount;
-        } 
+        }
+
+        if (currHealth <= 0)
+        {
+            alive = false;
+            anim.SetBool("chase", false);
+            //agentSelf.enabled = false;
+            agent.enabled = false;
+            //trigger death animation
+
+            if (deathAnimation == 1)
+            {
+                anim.SetTrigger("death 1");
+            }
+            else
+            {
+                anim.SetTrigger("death 2");
+            }
+            gameObject.tag = "Untagged";
+        }
     }
 
     public void stopMoving()
@@ -86,7 +110,7 @@ public class enemyScript : MonoBehaviour
         //when the enemy has 0 current health this function changes the tag so the game manager knows its dead and disables the collider component to remove collisions
         gameObject.tag = "Untagged";
         transform.GetComponent<Animator>().enabled = false;
-        transform.GetComponent<CapsuleCollider>().enabled = false;
+        //transform.GetComponent<CapsuleCollider>().enabled = false;
     }
 
 }

@@ -19,14 +19,20 @@ public class zombieWalkState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        self.agent.SetDestination(self.navTarget.transform.position);
+        if (self.currHealth > 0 && self.alive)
+        {
+            self.agent.SetDestination(self.navTarget.transform.position);
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        self.agent.SetDestination(self.agent.transform.position);
-        self.agent.isStopped = true;
+        if (self.currHealth > 0 && self.alive)
+        {
+            //self.agent.SetDestination(self.agent.transform.position);
+            //self.agent.isStopped = true;
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

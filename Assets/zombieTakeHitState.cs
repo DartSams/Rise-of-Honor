@@ -10,8 +10,8 @@ public class zombieTakeHitState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         self = animator.GetComponent<enemyScript>();
-        self.agent.SetDestination(self.agent.transform.position);
-        self.agent.isStopped = true;
+        //self.agent.SetDestination(self.agent.transform.position);
+        //self.agent.isStopped = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,7 +23,10 @@ public class zombieTakeHitState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        self.agent.isStopped = false;
+        if (self.currHealth > 0 && self.alive)
+        {
+            //self.agent.isStopped = false;
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

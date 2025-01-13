@@ -14,9 +14,10 @@ public class gameManager : MonoBehaviour
     public TMP_Text undeadCountText;
     public TMP_Text playerMoneyText;
     public List<GameObject> zombiePrefabs;
+    public List<GameObject> powerUpsList;
     //public List<GameObject> zombieSpawnLocations;
     List<Transform> zombieSpawnLocations = new List<Transform>();
-    public GameObject zombiePrefab;
+    //public GameObject zombiePrefab;
     public GameObject bloodSplatterEffect;
 
     // Start is called before the first frame update
@@ -37,6 +38,7 @@ public class gameManager : MonoBehaviour
         GameObject z = Instantiate(zombie, zombieLocation.transform);
         z.GetComponent<enemyScript>().navTarget = player;
         z.GetComponent<enemyScript>().bloodSplatterEffect = bloodSplatterEffect;
+        z.GetComponent<enemyScript>().powerUp = getRandomPowerUpFromList(powerUpsList);
         playerManager = player.GetComponent<playerManager>();
         for (int i = 0; i < waveNum; i++)
         {
@@ -63,7 +65,7 @@ public class gameManager : MonoBehaviour
                 //increase zombie move speed,health,and damage
                 //then also increase the wave change limit
                 waveChangeLimit += 2;
-                zombiePrefab.GetComponent<NavMeshAgent>().speed = zombiePrefab.GetComponent<NavMeshAgent>().speed + 0.2f;
+                //zombiePrefab.GetComponent<NavMeshAgent>().speed = zombiePrefab.GetComponent<NavMeshAgent>().speed + 0.2f;
             }
         } //if all zombies are killed then starts a new round spawning in more zombies
     }
@@ -79,6 +81,7 @@ public class gameManager : MonoBehaviour
         GameObject z = Instantiate(zombie, zombieLocation);
         z.GetComponent<enemyScript>().navTarget = player;
         z.GetComponent<enemyScript>().bloodSplatterEffect = bloodSplatterEffect;
+        z.GetComponent<enemyScript>().powerUp = getRandomPowerUpFromList(powerUpsList);
     }
 
     GameObject chooseZombie(List<GameObject> lst)
@@ -98,6 +101,14 @@ public class gameManager : MonoBehaviour
     {
         int randomIndex = Random.Range(0, lst.Count);
         GameObject item = lst[randomIndex].gameObject;
+
+        return item;
+    }
+
+    GameObject getRandomPowerUpFromList(List<GameObject> lst)
+    {
+        int randomIndex = Random.Range(0, lst.Count);
+        GameObject item = lst[randomIndex];
 
         return item;
     }

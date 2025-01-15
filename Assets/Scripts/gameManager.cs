@@ -26,11 +26,11 @@ public class gameManager : MonoBehaviour
         GameObject spawnPoints = GameObject.FindGameObjectWithTag("zombieSpawnPoints");
         foreach (Transform spawnPoint in spawnPoints.transform)
         {
-            if (spawnPoint.gameObject.name == "zombieTestSpawnLocation") //only added this for testing purposes
+            //if (spawnPoint.gameObject.name == "zombieTestSpawnLocation") //only added this for testing purposes
             {
-                zombieSpawnLocations.Add(spawnPoint);
 
             }
+            zombieSpawnLocations.Add(spawnPoint);
         }
         GameObject zombieLocation = getRandomFromList(zombieSpawnLocations);
         GameObject zombie = chooseZombie(zombiePrefabs);

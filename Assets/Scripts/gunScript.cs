@@ -9,7 +9,8 @@ using UnityEngine.Assertions.Must;
 public class gunScript : MonoBehaviour
 {
     public GameObject bullet;
-    public int clipSize;
+    public int currClipSize;
+    public int maxClipSize;
     public Transform bulletSpawn;
     public GameObject player;
     public int price;
@@ -20,15 +21,21 @@ public class gunScript : MonoBehaviour
     bool canShoot = false;
     public bool isFullAutoGun;
     public ParticleSystem muzzleGunFlash;
+    Animator anim;
 
     // Start is called before the first frame update
     void Awake()
     {
         //player = GameObject.FindWithTag("player");
         shotSound = GetComponent<AudioSource>();
-        priceText.text = "Cost: $" + price.ToString();
+        anim = transform.parent.GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        priceText.text = "Cost: $" + price.ToString();
+        currClipSize = maxClipSize;
+    }
     private void FixedUpdate()
     {
         //fullAutoShot();
@@ -42,7 +49,8 @@ public class gunScript : MonoBehaviour
     // Update is called once per frame
     public void Shoot()
     {
-        if (clipSize > 0)
+        anim.SetTrigger("shoot");
+        if (currClipSize > 0)
         {
             GameObject b = Instantiate(bullet, bulletSpawn.transform.position, bulletSpawn.rotation); //creates a bullet when the gun is shot
             muzzleGunFlash.Play();
@@ -57,7 +65,7 @@ public class gunScript : MonoBehaviour
 
     public void decreaseClip()
     {
-        clipSize -= 1;
+        currClipSize -= 1;
     }
 
     public void fullAutoShot()
@@ -70,10 +78,16 @@ public class gunScript : MonoBehaviour
         canShoot = false;
     }
 
-    public void takePlayerMoney()
+    public void pickupGun()
     {
         player.GetNamedChild("rightHandController").GetComponent<playerController>().pm.loseMoney(price);
         gameObject.tag = "currGun";
+    }
+
+    public void dropGun()
+    {
+        gameObject.tag = "Untagged";
+        gameObject.transform.parent.GetComponent<Rigidbody>().useGravity = true;
     }
 
     public void removeText()

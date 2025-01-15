@@ -1827,7 +1827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHealth: 0
-  maxHealth: 0
+  maxHealth: 10
   agent: {fileID: 890858356508582455}
   navTarget: {fileID: 0}
   alive: 0
@@ -1842,7 +1842,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4377211321053079128}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 0.7
   m_Acceleration: 8

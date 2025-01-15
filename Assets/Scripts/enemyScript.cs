@@ -118,10 +118,10 @@ public class enemyScript : MonoBehaviour
     void dropLoot()
     {
         int lootChance = Random.Range(0, powerUpChanceList.Count);
-        Debug.Log("loot chance was: " + powerUpChanceList[lootChance]);
+        //Debug.Log("loot spawned was: " + powerUpChanceList[lootChance]);
         if (powerUpChanceList[lootChance] != null)
         {
-            Debug.Log("spawned");
+            //Debug.Log("spawned");
             //spawn the powerUp
             GameObject p = Instantiate(powerUp, transform.position + Vector3.up * 0.5f, Quaternion.identity);
             p.transform.parent = transform;
@@ -151,7 +151,7 @@ public class enemyScript : MonoBehaviour
         setRigidBodyState(false);
         setColliderState(true);
         gameObject.tag = "Untagged"; //when the enemy has 0 current health this changes the tag so the game manager knows its dead and disables the collider component to remove collisions
-
+        StartCoroutine(removeBody());
     }
 
     void setRigidBodyState(bool state)
@@ -178,5 +178,10 @@ public class enemyScript : MonoBehaviour
         GetComponent<Collider>().enabled = !state;
     }
 
-
+    public IEnumerator removeBody()
+    {
+        float delay = Random.Range(10f, 30f);
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+    } //removes the dead zombie from the world for optimization
 }

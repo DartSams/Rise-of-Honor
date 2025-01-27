@@ -30,8 +30,12 @@ public class gameManager : MonoBehaviour
             {
 
             }
-            zombieSpawnLocations.Add(spawnPoint);
+            //zombieSpawnLocations.Add(spawnPoint);
         }
+    }
+
+    private void Start()
+    {
         GameObject zombieLocation = getRandomFromList(zombieSpawnLocations);
         GameObject zombie = chooseZombie(zombiePrefabs);
         zombie.tag = "enemy";
@@ -42,7 +46,7 @@ public class gameManager : MonoBehaviour
         playerManager = player.GetComponent<playerManager>();
         for (int i = 0; i < waveNum; i++)
         {
-            StartCoroutine(spawnZombie());
+            //StartCoroutine(spawnZombie());
         }
     }
 

@@ -1336,6 +1336,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHealth: 0
   maxHealth: 100
+  agent: {fileID: 0}
+  navTarget: {fileID: 0}
+  alive: 0
+  bloodSplatterEffect: {fileID: 0}
+  isCrawling: 0
+  powerUp: {fileID: 0}
 --- !u!114 &930962999930505630
 MonoBehaviour:
   m_ObjectHideFlags: 0
